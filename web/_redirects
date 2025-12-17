@@ -1,1 +1,9 @@
+/assets/* /assets/:splat 200
+/icons/* /icons/:splat 200
+/canvaskit/* /canvaskit/:splat 200
+/favicon.png /favicon.png 200
+/manifest.json /manifest.json 200
+/flutter.js /flutter.js 200
+/flutter_bootstrap.js /flutter_bootstrap.js 200
+/flutter_service_worker.js /flutter_service_worker.js 200
 /* /index.html 200
