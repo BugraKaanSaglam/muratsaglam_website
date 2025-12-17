@@ -94,6 +94,40 @@
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 14px;
     }
+    .loader-button {
+      display: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #0ea5e9;
+      background: linear-gradient(135deg, #1bbde3, #0ea5e9);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.24);
+      width: 100%;
+    }
+    .loader-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(14, 165, 233, 0.32);
+    }
+    .loader-button:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
+    }
+    .loader-card.loader-card--error .loader-spinner {
+      display: none;
+    }
+    .loader-card.loader-card--error .loader-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .loader-card.loader-card--error .loader-caption {
+      color: #0f172a;
+    }
     @keyframes spin {
       to {
         transform: rotate(360deg);
@@ -120,16 +154,51 @@
       <p class="loader-title">Dr. Murat Sağlam</p>
       <div class="loader-spinner"></div>
       <p class="loader-caption">Yükleniyor...</p>
+      <button id="loader-retry" class="loader-button" type="button">
+        <span>Tekrar dene</span>
+      </button>
     </div>
   </div>
   <script>
-    window.addEventListener('flutter-first-frame', function () {
+    (function () {
       const loader = document.getElementById('app-loader');
-      if (loader) {
+      const card = loader?.querySelector('.loader-card');
+      const caption = loader?.querySelector('.loader-caption');
+      const retry = loader?.querySelector('#loader-retry');
+      let fallbackTimer;
+
+      const hideLoader = () => {
+        if (!loader) return;
         loader.classList.add('app-loader--hide');
         setTimeout(() => loader.remove(), 450);
-      }
-    });
+      };
+
+      const showError = (message) => {
+        if (!loader || !card) return;
+        clearTimeout(fallbackTimer);
+        card.classList.add('loader-card--error');
+        if (caption) caption.textContent = message;
+        if (retry) retry.style.display = 'inline-flex';
+        loader.classList.remove('app-loader--hide');
+      };
+
+      retry?.addEventListener('click', () => window.location.reload());
+
+      window.addEventListener('flutter-first-frame', () => {
+        clearTimeout(fallbackTimer);
+        hideLoader();
+      });
+
+      window.addEventListener('error', (event) => {
+        if (event?.filename && event.filename.includes('main.dart.js')) {
+          showError('Uygulama yüklenemedi. Lütfen sayfayı yenileyin.');
+        }
+      });
+
+      fallbackTimer = window.setTimeout(() => {
+        showError('Bağlantı yavaş görünüyor. Yenileyip tekrar deneyebilirsiniz.');
+      }, 9000);
+    })();
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

@@ -142,6 +142,18 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder<List<ServiceInfo>>(
       future: servicesFuture,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          debugPrint(
+            'Service data could not be loaded: ${snapshot.error}\n${snapshot.stackTrace}',
+          );
+          return _ErrorScreen(
+            onRetry: () {
+              setState(() {
+                _servicesFuture = _loadServices(context.locale);
+              });
+            },
+          );
+        }
         if (snapshot.connectionState != ConnectionState.done ||
             !snapshot.hasData) {
           return const _LoadingScreen();
@@ -319,6 +331,110 @@ class _LoadingCard extends StatelessWidget {
               color: Colors.black.withValues(alpha: 0.7),
               fontWeight: FontWeight.w600,
               fontSize: isMobile ? 13 : 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorScreen extends StatelessWidget {
+  const _ErrorScreen({required this.onRetry});
+
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          const _Backdrop(),
+          Center(
+            child: _ErrorCard(onRetry: onRetry),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorCard extends StatelessWidget {
+  const _ErrorCard({required this.onRetry});
+
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 18),
+          ),
+        ],
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  'assets/images/cropped-msaglamlogo.png',
+                  width: isMobile ? 42 : 48,
+                  height: isMobile ? 42 : 48,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Dr. Murat Sağlam',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w800,
+                  fontSize: isMobile ? 16 : 18,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'İçerik yüklenemedi. Lütfen sayfayı yenileyin veya tekrar deneyin.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black.withValues(alpha: 0.75),
+              fontWeight: FontWeight.w600,
+              fontSize: isMobile ? 13 : 14,
+            ),
+          ),
+          const SizedBox(height: 14),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFF1BBDE3),
+                padding:
+                    EdgeInsets.symmetric(vertical: isMobile ? 10 : 12),
+              ),
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh, size: 18),
+              label: Text(
+                'Tekrar dene',
+                style: TextStyle(
+                  fontSize: isMobile ? 13 : 14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
           ),
         ],
