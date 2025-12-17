@@ -112,6 +112,12 @@
       }
     }
   </style>
+  <script>
+    // Force CanvasKit assets to be loaded from the bundled folder and keep auto renderer.
+    window.flutterConfiguration = window.flutterConfiguration || {};
+    window.flutterConfiguration.canvasKitBaseUrl = "canvaskit";
+    window.flutterConfiguration.renderer = "auto";
+  </script>
 </head>
 <body>
   <div id="app-loader">
