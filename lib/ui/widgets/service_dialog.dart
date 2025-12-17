@@ -10,8 +10,10 @@ class ServiceDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxWidth = MediaQuery.of(context).size.width * 0.8;
-    final maxHeight = MediaQuery.of(context).size.height * 0.8;
+    final size = MediaQuery.of(context).size;
+    final maxWidth = size.width * 0.8;
+    final maxHeight = size.height * 0.8;
+    final isMobile = size.width < 720;
 
     return Material(
       color: Colors.transparent,
@@ -40,9 +42,17 @@ class ServiceDialog extends StatelessWidget {
                 Stack(
                   children: [
                     SizedBox(
-                      height: 200,
+                      height: isMobile ? 220 : 280,
                       width: double.infinity,
-                      child: Image.asset(info.image, fit: BoxFit.cover),
+                      child: Container(
+                        color: const Color(0xFFF5F5F5),
+                        child: Center(
+                          child: Image.asset(
+                            info.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
                     ),
                     Positioned(
                       top: 12,

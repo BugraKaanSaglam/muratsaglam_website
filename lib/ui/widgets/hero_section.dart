@@ -120,7 +120,6 @@ class HeroSection extends StatelessWidget {
               alignment: isMobile ? Alignment.centerLeft : Alignment.centerRight,
               child: Container(
                 width: isMobile ? double.infinity : 360,
-                height: isMobile ? 320 : 420,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(22),
                   boxShadow: [
@@ -131,30 +130,34 @@ class HeroSection extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
+                child: AspectRatio(
+                  aspectRatio: isMobile ? 3 / 4 : 4 / 5,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(22),
                         child: Image.asset(
                           'assets/images/muratsaglamimage.jpg',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center,
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom: 16,
-                      left: 16,
-                      child: Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: const [
-                          _Pill(text: '30+ years experience'),
-                          _Pill(text: '10,000+ surgeries'),
-                        ],
+                      Positioned(
+                        bottom: 16,
+                        left: 16,
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: const [
+                            _Pill(text: '30+ years experience'),
+                            _Pill(text: '10,000+ surgeries'),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

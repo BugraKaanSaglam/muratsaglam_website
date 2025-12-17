@@ -145,15 +145,15 @@ class _ServiceCardState extends State<_ServiceCard> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(14),
-                  child: SizedBox(
-                    height: 160,
-                    width: double.infinity,
+                  child: AspectRatio(
+                    aspectRatio: 4 / 3,
                     child: Stack(
                       children: [
                         Positioned.fill(
                           child: Image.asset(
                             widget.info.image,
                             fit: BoxFit.cover,
+                            alignment: Alignment.center,
                           ),
                         ),
                         Positioned(
