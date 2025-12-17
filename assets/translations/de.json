@@ -1,0 +1,35 @@
+{
+  "nav": {
+    "home": "Start",
+    "services": "Leistungen",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "badge": "Okuloplastik & moderne Augenchirurgie",
+    "title": "Assoc. Prof. Dr."
+  },
+  "cta": {
+    "appointment": "Termin buchen",
+    "services": "Alle Leistungen"
+  },
+  "stats": {
+    "item1": {"title": "Okuloplastik", "body": "Lidästhetik, Prothesen, Tränenwegs­chirurgie."},
+    "item2": {"title": "Netzhaut & Glaskörper", "body": "Diabetische Retinopathie, vitreoretinale Chirurgie, Laser."},
+    "item3": {"title": "Katarakt & Laser", "body": "Premiumlinsen, Excimer-Laser, refraktive Lösungen."}
+  },
+  "services": {
+    "count": "Artikel",
+    "lead": "Alle Schwerpunkte auf einer Seite zusammengefasst.",
+    "detail": "Details"
+  },
+  "about": {
+    "tagline": "Mitglied der Türkischen Ophthalmologischen Gesellschaft, 30+ Jahre Erfahrung"
+  },
+  "contact": {
+    "address": "Adresse",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "hours": "Öffnungszeiten"
+  }
+}

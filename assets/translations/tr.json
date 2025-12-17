@@ -1,0 +1,35 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "about": "Hakkında",
+    "contact": "İletişim"
+  },
+  "hero": {
+    "badge": "Oküloplasti ve ileri göz cerrahisi",
+    "title": "Dr. Öğr. Üyesi"
+  },
+  "cta": {
+    "appointment": "Randevu Al",
+    "services": "Tüm hizmetler"
+  },
+  "stats": {
+    "item1": {"title": "Oküloplasti", "body": "Göz kapağı estetiği, protez, gözyaşı kanalı cerrahisi."},
+    "item2": {"title": "Retina & Vitreus", "body": "Diyabetik retinopati, vitreoretinal cerrahi, lazer."},
+    "item3": {"title": "Katarakt & Lazer", "body": "Premium lens, excimer lazer, refraktif çözümler."}
+  },
+  "services": {
+    "count": "içerik",
+    "lead": "Tüm klinik odak alanları hızlı okumak için tek sayfada toplandı.",
+    "detail": "Detay"
+  },
+  "about": {
+    "tagline": "Türk Oftalmoloji Derneği üyesi, 30+ yıllık deneyim"
+  },
+  "contact": {
+    "address": "Adres",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "hours": "Çalışma saatleri"
+  }
+}

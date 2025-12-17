@@ -1,0 +1,414 @@
+import 'dart:convert';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../models/service_info.dart';
+import 'widgets/about_section.dart';
+import 'widgets/contact_section.dart';
+import 'widgets/hero_section.dart';
+import 'widgets/nav_bar.dart';
+import 'widgets/service_dialog.dart';
+import 'widgets/services_grid.dart';
+import 'widgets/stats_row.dart';
+
+/// Home page orchestrates sections and data loading.
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final ScrollController _scrollController;
+  Future<List<ServiceInfo>>? _servicesFuture;
+  Locale? _loadedLocale;
+
+  final _heroKey = GlobalKey();
+  final _servicesKey = GlobalKey();
+  final _aboutKey = GlobalKey();
+  final _contactKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final locale = context.locale;
+    if (_loadedLocale != locale) {
+      _loadedLocale = locale;
+      _servicesFuture = _loadServices(locale);
+      setState(() {});
+    }
+  }
+
+  Future<List<ServiceInfo>> _loadServices(Locale locale) async {
+    final raw = await _loadContentForLocale(locale);
+    final parsed = jsonDecode(raw) as List;
+    const imageMap = {
+      'okuloplasti-nedir': 'assets/images/msaglam.jpg',
+      'vitreoretinal-cerrahi': 'assets/images/retina.jpg',
+      'eximer-lazer': 'assets/images/gozdelazer.jpg',
+      'iletisim-tr': 'assets/images/footerimg.jpg',
+      'goz-kurulugu-tr': 'assets/images/gozkurulugu.jpg',
+      'kornea-hastaliklari-tr': 'assets/images/kornea.jpg',
+      'retina-hastaliklari-tr': 'assets/images/retina.jpg',
+      'goz-tansiyonu-glokom': 'assets/images/goztansiyonu.jpg',
+      'katarakt': 'assets/images/katarakt.jpg',
+      'gozde-iltihabi-hastaliklar': 'assets/images/iltihap.jpg',
+      'sasilik': 'assets/images/sasilik.jpg',
+      'gorme-kusurlari': 'assets/images/gormekusurlari.jpg',
+      'diger-kapak-sekil-bozukluklari': 'assets/images/msaglam4.jpg',
+      'goz-yasi-kanal-hastaliklari-goz-sulanmasi': 'assets/images/gozde_lazer1.jpg',
+      'goz-protezi-veya-gozde-tattoo': 'assets/images/msaglam1.jpg',
+      'goz-kapagi-sarkmasi-blefaroselazis': 'assets/images/msaglam4.jpg',
+      'gozalti-torbalari': 'assets/images/msaglam2.jpg',
+      'goz-kapagi-dusuklugu-ptozis': 'assets/images/msaglam4.jpg',
+      'murat-saglam-kimdir': 'assets/images/muratsaglamimage.jpg',
+    };
+    return parsed
+        .map(
+          (e) => ServiceInfo.fromJson(
+            e as Map<String, dynamic>,
+            imageMap,
+          ),
+        )
+        .toList();
+  }
+
+  Future<String> _loadContentForLocale(Locale locale) async {
+    final langCode = locale.languageCode.toLowerCase();
+    final candidates = <String>[
+      'assets/content/pages_$langCode.json',
+      if (langCode != 'tr') 'assets/content/pages_en.json',
+      'assets/content/pages.json',
+    ];
+
+    for (final path in candidates) {
+      try {
+        return await rootBundle.loadString(path);
+      } catch (_) {
+        // Try next fallback.
+      }
+    }
+
+    throw FlutterError('No content asset found for $langCode');
+  }
+
+  void _scrollTo(GlobalKey key) {
+    final context = key.currentContext;
+    if (context == null) return;
+    Scrollable.ensureVisible(
+      context,
+      duration: const Duration(milliseconds: 650),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  Future<void> _openAppointment() async {
+    final booking = Uri.parse(
+      'https://www.doktortakvimi.com/murat-saglam/goz-hastaliklari/ordu',
+    );
+    if (await canLaunchUrl(booking)) {
+      await launchUrl(booking, mode: LaunchMode.externalApplication);
+      return;
+    }
+    final tel = Uri(scheme: 'tel', path: '+904528001818');
+    if (await canLaunchUrl(tel)) {
+      await launchUrl(tel);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final servicesFuture = _servicesFuture;
+    if (servicesFuture == null) {
+      return const _LoadingScreen();
+    }
+
+    return FutureBuilder<List<ServiceInfo>>(
+      future: servicesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done ||
+            !snapshot.hasData) {
+          return const _LoadingScreen();
+        }
+        final services = snapshot.data!;
+        final about =
+            services.firstWhere((e) => e.slug == 'murat-saglam-kimdir');
+        final contact =
+            services.firstWhere((e) => e.slug == 'iletisim-tr', orElse: () {
+          return ServiceInfo(
+            title: 'Contact',
+            slug: 'iletisim-tr',
+            excerpt: '',
+            content: '',
+            image: 'assets/images/footerimg.jpg',
+          );
+        });
+        final heroInfo =
+            services.firstWhere((e) => e.slug == 'okuloplasti-nedir');
+        final serviceItems = services
+            .where((e) =>
+                e.slug != 'iletisim-tr' && e.slug != 'murat-saglam-kimdir')
+            .toList();
+
+        return Scaffold(
+          body: Stack(
+            children: [
+              const _Backdrop(),
+              SafeArea(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    children: [
+                      NavBar(
+                        onHome: () => _scrollTo(_heroKey),
+                        onServices: () => _scrollTo(_servicesKey),
+                        onAbout: () => _scrollTo(_aboutKey),
+                        onContact: () => _scrollTo(_contactKey),
+                        onAppointment: _openAppointment,
+                      ),
+                      const SizedBox(height: 14),
+                      HeroSection(
+                        key: _heroKey,
+                        heroInfo: heroInfo,
+                        onContact: () => _scrollTo(_contactKey),
+                        onServices: () => _scrollTo(_servicesKey),
+                      ),
+                      const SizedBox(height: 28),
+                      const StatsRow(),
+                      const SizedBox(height: 28),
+                      ServicesGrid(
+                        key: _servicesKey,
+                        services: serviceItems,
+                        onOpen: (info) => _openDetails(context, info),
+                      ),
+                      const SizedBox(height: 28),
+                      AboutSection(key: _aboutKey, about: about),
+                      const SizedBox(height: 28),
+                      ContactSection(
+                        key: _contactKey,
+                        contact: contact,
+                        onAppointment: _openAppointment,
+                      ),
+                      const SizedBox(height: 48),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _openDetails(BuildContext context, ServiceInfo info) {
+    showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'details',
+      barrierColor: Colors.black.withValues(alpha: 0.4),
+      transitionDuration: const Duration(milliseconds: 320),
+      pageBuilder: (_, __, ___) => Center(
+        child: ServiceDialog(info: info),
+      ),
+      transitionBuilder: (_, anim, __, child) {
+        return Transform.scale(
+          scale: Curves.easeOutCubic.transform(anim.value),
+          child: Opacity(opacity: anim.value, child: child),
+        );
+      },
+    );
+  }
+}
+
+class _LoadingScreen extends StatelessWidget {
+  const _LoadingScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Stack(
+        children: [
+          _Backdrop(),
+          Center(
+            child: _LoadingCard(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LoadingCard extends StatelessWidget {
+  const _LoadingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 18),
+          ),
+        ],
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  'assets/images/cropped-msaglamlogo.png',
+                  width: isMobile ? 42 : 48,
+                  height: isMobile ? 42 : 48,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Dr. Murat Sağlam',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w800,
+                  fontSize: isMobile ? 16 : 18,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          const SizedBox(
+            width: 46,
+            height: 46,
+            child: CircularProgressIndicator(
+              strokeWidth: 4,
+              color: Color(0xFF1BBDE3),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Loading...',
+            style: TextStyle(
+              color: Colors.black.withValues(alpha: 0.7),
+              fontWeight: FontWeight.w600,
+              fontSize: isMobile ? 13 : 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Backdrop extends StatelessWidget {
+  const _Backdrop();
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned.fill(
+      child: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFFF6F9FB),
+                  Color(0xFFE8F5FF),
+                  Color(0xFFDFF3F6)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+          Positioned(
+            top: -100,
+            left: -80,
+            child: _BlurCircle(
+              color: const Color(0xFF8EE0FF),
+              size: 260,
+              opacity: 0.38,
+            ),
+          ),
+          Positioned(
+            bottom: -160,
+            right: -40,
+            child: _BlurCircle(
+              color: const Color(0xFFA5F3FC),
+              size: 240,
+              opacity: 0.35,
+            ),
+          ),
+          Positioned(
+            top: 420,
+            right: 120,
+            child: _BlurCircle(
+              color: const Color(0xFF9AE6B4),
+              size: 220,
+              opacity: 0.28,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BlurCircle extends StatelessWidget {
+  const _BlurCircle({
+    required this.color,
+    required this.size,
+    required this.opacity,
+  });
+
+  final Color color;
+  final double size;
+  final double opacity;
+
+  @override
+  Widget build(BuildContext context) {
+    final tint = color.withValues(alpha: opacity);
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: tint,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: tint.withValues(alpha: 0.4),
+            blurRadius: 120,
+            spreadRadius: 60,
+          ),
+        ],
+      ),
+    );
+  }
+}

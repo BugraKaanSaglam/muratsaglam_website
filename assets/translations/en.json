@@ -1,0 +1,35 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Oculoplastic & advanced eye surgery",
+    "title": "Assoc. Prof. Dr."
+  },
+  "cta": {
+    "appointment": "Book appointment",
+    "services": "View all services"
+  },
+  "stats": {
+    "item1": {"title": "Oculoplastics", "body": "Eyelid aesthetics, prosthetics, tear duct surgery."},
+    "item2": {"title": "Retina & Vitreous", "body": "Diabetic retinopathy, vitreoretinal surgery, lasers."},
+    "item3": {"title": "Cataract & Laser", "body": "Premium lenses, excimer laser, refractive solutions."}
+  },
+  "services": {
+    "count": "articles",
+    "lead": "All clinical focus areas gathered on one page for quick reading.",
+    "detail": "Details"
+  },
+  "about": {
+    "tagline": "Member of the Turkish Ophthalmology Association, 30+ years of expertise"
+  },
+  "contact": {
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Hours"
+  }
+}

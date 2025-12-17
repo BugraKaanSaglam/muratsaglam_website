@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="muratsaglam_website">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>muratsaglam_website</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      background: #f6f9fb;
+    }
+    #app-loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 20% 20%, rgba(142, 224, 255, 0.28), transparent 32%),
+        radial-gradient(circle at 80% 80%, rgba(165, 243, 252, 0.26), transparent 34%),
+        linear-gradient(135deg, #f6f9fb, #e8f5ff, #dff3f6);
+      z-index: 9999;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #app-loader.app-loader--hide {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      min-width: 210px;
+    }
+    .loader-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+    .loader-title {
+      margin: 0;
+      color: #0f172a;
+      font-weight: 800;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 18px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .loader-spinner {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 4px solid #1bbde3;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+    .loader-caption {
+      margin: 0;
+      color: rgba(15, 23, 42, 0.7);
+      font-weight: 600;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @media (max-width: 640px) {
+      .loader-card {
+        min-width: 180px;
+        padding: 16px 18px;
+      }
+      .loader-title {
+        font-size: 16px;
+      }
+      .loader-caption {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-loader">
+    <div class="loader-card">
+      <img src="assets/images/cropped-msaglamlogo.png" alt="Murat Sağlam" class="loader-logo">
+      <p class="loader-title">Dr. Murat Sağlam</p>
+      <div class="loader-spinner"></div>
+      <p class="loader-caption">Yükleniyor...</p>
+    </div>
+  </div>
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      const loader = document.getElementById('app-loader');
+      if (loader) {
+        loader.classList.add('app-loader--hide');
+        setTimeout(() => loader.remove(), 450);
+      }
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
