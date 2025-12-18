@@ -362,16 +362,6 @@ class _LoadingCard extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  'assets/images/cropped-msaglamlogo.png',
-                  width: isMobile ? 42 : 48,
-                  height: isMobile ? 42 : 48,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 10),
               Text(
                 'Dr. Murat Sağlam',
                 style: TextStyle(
