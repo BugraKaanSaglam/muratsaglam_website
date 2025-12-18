@@ -142,6 +142,15 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder<List<ServiceInfo>>(
       future: servicesFuture,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          debugPrint(
+            'Services load failed: ${snapshot.error}\n${snapshot.stackTrace}',
+          );
+          return _ErrorScreen(
+            message: snapshot.error.toString(),
+            onRetry: _retryLoad,
+          );
+        }
         if (snapshot.connectionState != ConnectionState.done ||
             !snapshot.hasData) {
           return const _LoadingScreen();
@@ -219,6 +228,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _retryLoad() {
+    _servicesFuture = _loadServices(context.locale);
+    setState(() {});
+  }
+
   void _openDetails(BuildContext context, ServiceInfo info) {
     showGeneralDialog<void>(
       context: context,
@@ -250,6 +264,71 @@ class _LoadingScreen extends StatelessWidget {
           _Backdrop(),
           Center(
             child: _LoadingCard(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorScreen extends StatelessWidget {
+  const _ErrorScreen({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          const _Backdrop(),
+          Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 420),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.08),
+                    blurRadius: 24,
+                    offset: const Offset(0, 18),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Yüklenirken bir hata oluştu.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    message,
+                    style: TextStyle(
+                      color: Colors.black.withValues(alpha: 0.75),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: onRetry,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1BBDE3),
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Tekrar dene'),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

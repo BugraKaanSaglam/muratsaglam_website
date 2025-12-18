@@ -112,12 +112,6 @@
       }
     }
   </style>
-  <script>
-    // Force CanvasKit assets to be loaded from the bundled folder and keep auto renderer.
-    window.flutterConfiguration = window.flutterConfiguration || {};
-    window.flutterConfiguration.canvasKitBaseUrl = "canvaskit";
-    window.flutterConfiguration.renderer = "auto";
-  </script>
 </head>
 <body>
   <div id="app-loader">
@@ -137,6 +131,61 @@
       }
     });
   </script>
-  <script src="flutter_bootstrap.js" async></script>
+  <script defer src="flutter.js"></script>
+  <script>
+    // Bootstrap Flutter with local CanvasKit (no gstatic) and explicit build config.
+    window.addEventListener('load', function () {
+      const config = {
+        renderer: 'canvaskit',
+        useLocalCanvasKit: true,
+        canvasKitBaseUrl: 'canvaskit',
+      };
+
+      // Provide build config normally set by flutter_bootstrap.js.
+      window._flutter = window._flutter || {};
+      window._flutter.buildConfig = window._flutter.buildConfig || {
+        engineRevision: 'local',
+        builds: [
+          {
+            compileTarget: 'dart2js',
+            renderer: 'canvaskit',
+            mainJsPath: 'main.dart.js',
+          },
+          {},
+        ],
+      };
+
+      _flutter.loader
+        .load({
+          config,
+          onEntrypointLoaded: function (engineInitializer) {
+            engineInitializer.initializeEngine(config).then(function (appRunner) {
+              appRunner.runApp();
+            });
+          },
+        })
+        .catch(function (err) {
+          console.error('Flutter bootstrap failed', err);
+          const loader = document.getElementById('app-loader');
+          if (loader) {
+            loader.classList.add('app-loader--hide');
+            const errorBox = document.createElement('div');
+            errorBox.style.position = 'fixed';
+            errorBox.style.inset = '0';
+            errorBox.style.display = 'flex';
+            errorBox.style.alignItems = 'center';
+            errorBox.style.justifyContent = 'center';
+            errorBox.style.background = 'linear-gradient(135deg, #f6f9fb, #e8f5ff, #dff3f6)';
+            errorBox.innerHTML = `
+              <div style="max-width:520px;background:white;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 18px 32px rgba(0,0,0,0.08);font-family:'Helvetica Neue', Arial, sans-serif;">
+                <div style="font-weight:800;font-size:16px;margin-bottom:8px;">Başlatılamadı</div>
+                <div style="font-size:13px;color:#0f172a">${err}</div>
+              </div>
+            `;
+            document.body.appendChild(errorBox);
+          }
+        });
+    });
+  </script>
 </body>
 </html>
