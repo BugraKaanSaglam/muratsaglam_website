@@ -7,6 +7,8 @@ class LocaleKeys {
 
   static const heroBadge = 'hero.badge';
   static const heroTitle = 'hero.title';
+  static const heroPill1 = 'hero.pill1';
+  static const heroPill2 = 'hero.pill2';
   static const ctaAppointment = 'cta.appointment';
   static const ctaServices = 'cta.services';
 
@@ -27,4 +29,13 @@ class LocaleKeys {
   static const contactPhone = 'contact.phone';
   static const contactEmail = 'contact.email';
   static const contactHours = 'contact.hours';
+  static const contactAddressValue = 'contact.address_value';
+  static const contactPhoneValue = 'contact.phone_value';
+  static const contactEmailValue = 'contact.email_value';
+  static const contactHoursLine1 = 'contact.hours_line1';
+  static const contactHoursLine2 = 'contact.hours_line2';
+
+  static const commonLoading = 'common.loading';
+  static const commonRetry = 'common.retry';
+  static const commonLoadError = 'common.load_error';
 }

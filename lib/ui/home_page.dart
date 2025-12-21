@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../l10n/keys.dart';
 import '../models/service_info.dart';
 import 'widgets/about_section.dart';
 import 'widgets/contact_section.dart';
@@ -108,6 +109,30 @@ class _HomePageState extends State<HomePage> {
     throw FlutterError('No content asset found for $langCode');
   }
 
+  ServiceInfo _placeholderService(String slug) {
+    return ServiceInfo(
+      title: '',
+      slug: slug,
+      excerpt: '',
+      content: '',
+      image: 'assets/images/msaglam.jpg',
+    );
+  }
+
+  ServiceInfo _findService(
+    List<ServiceInfo> services,
+    String slug, {
+    ServiceInfo? fallback,
+  }) {
+    return services.firstWhere(
+      (e) => e.slug == slug,
+      orElse: () {
+        debugPrint('Missing service content for slug: $slug');
+        return fallback ?? _placeholderService(slug);
+      },
+    );
+  }
+
   void _scrollTo(GlobalKey key) {
     final context = key.currentContext;
     if (context == null) return;
@@ -156,20 +181,19 @@ class _HomePageState extends State<HomePage> {
           return const _LoadingScreen();
         }
         final services = snapshot.data!;
-        final about =
-            services.firstWhere((e) => e.slug == 'murat-saglam-kimdir');
-        final contact =
-            services.firstWhere((e) => e.slug == 'iletisim-tr', orElse: () {
-          return ServiceInfo(
-            title: 'Contact',
+        final about = _findService(services, 'murat-saglam-kimdir');
+        final contact = _findService(
+          services,
+          'iletisim-tr',
+          fallback: ServiceInfo(
+            title: LocaleKeys.navContact.tr(),
             slug: 'iletisim-tr',
             excerpt: '',
             content: '',
             image: 'assets/images/footerimg.jpg',
-          );
-        });
-        final heroInfo =
-            services.firstWhere((e) => e.slug == 'okuloplasti-nedir');
+          ),
+        );
+        final heroInfo = _findService(services, 'okuloplasti-nedir');
         final serviceItems = services
             .where((e) =>
                 e.slug != 'iletisim-tr' && e.slug != 'murat-saglam-kimdir')
@@ -258,10 +282,10 @@ class _LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
-          _Backdrop(),
+          const _Backdrop(),
           Center(
             child: _LoadingCard(),
           ),
@@ -303,8 +327,8 @@ class _ErrorScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Yüklenirken bir hata oluştu.',
+                  Text(
+                    LocaleKeys.commonLoadError.tr(),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -324,7 +348,7 @@ class _ErrorScreen extends StatelessWidget {
                       backgroundColor: const Color(0xFF1BBDE3),
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Tekrar dene'),
+                    child: Text(LocaleKeys.commonRetry.tr()),
                   ),
                 ],
               ),
@@ -363,7 +387,7 @@ class _LoadingCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Dr. Murat Sağlam',
+                '${LocaleKeys.heroTitle.tr()} Murat Sağlam',
                 style: TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.w800,
@@ -383,7 +407,7 @@ class _LoadingCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Loading...',
+            LocaleKeys.commonLoading.tr(),
             style: TextStyle(
               color: Colors.black.withValues(alpha: 0.7),
               fontWeight: FontWeight.w600,

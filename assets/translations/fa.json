@@ -7,7 +7,9 @@
   },
   "hero": {
     "badge": "جراحی پلاستیک چشم و جراحی پیشرفته",
-    "title": "استادیار دکتر"
+    "title": "استادیار دکتر",
+    "pill1": "بیش از ۳۰ سال تجربه",
+    "pill2": "بیش از ۱۰٬۰۰۰ عمل جراحی"
   },
   "cta": {
     "appointment": "رزرو نوبت",
@@ -30,6 +32,16 @@
     "address": "آدرس",
     "phone": "تلفن",
     "email": "ایمیل",
-    "hours": "ساعات کاری"
+    "hours": "ساعات کاری",
+    "address_value": "Bahçelievler Mah. Atatürk Bulvarı No:207, Altınordu – ORDU",
+    "phone_value": "(+90) 452 800 18 18",
+    "email_value": "gozdelazer@gmail.com",
+    "hours_line1": "دوشنبه تا شنبه 09:00 – 17:00",
+    "hours_line2": "یکشنبه تعطیل"
+  },
+  "common": {
+    "loading": "در حال بارگذاری...",
+    "retry": "دوباره تلاش کنید",
+    "load_error": "هنگام بارگذاری خطایی رخ داد."
   }
 }

@@ -14,13 +14,7 @@ Future<void> main() async {
 
   final startLocale = _detectLocale();
 
-  runApp(EasyLocalization(
-      supportedLocales: _supportedLocales,
-      path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
-      startLocale: startLocale,
-      useOnlyLangCode: true,
-      child: const App()));
+  runApp(EasyLocalization(supportedLocales: _supportedLocales, path: 'assets/translations', fallbackLocale: const Locale('en'), startLocale: startLocale, useOnlyLangCode: true, child: const App()));
 }
 
 /// Pick the best matching locale based on the user's browser/device settings.

@@ -16,55 +16,65 @@ class StatsRow extends StatelessWidget {
       (LocaleKeys.stat3Title.tr(), LocaleKeys.stat3Body.tr()),
     ];
 
-    return Wrap(
-      spacing: 16,
-      runSpacing: 12,
-      alignment: WrapAlignment.center,
-      children: items
-          .map(
-            (item) => AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-              constraints: BoxConstraints(
-                minWidth: isMobile ? MediaQuery.of(context).size.width : 260,
-                maxWidth: isMobile ? MediaQuery.of(context).size.width : 340,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 16,
-                    offset: const Offset(0, 12),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.of(context).size.width;
+        return Wrap(
+          spacing: 16,
+          runSpacing: 12,
+          alignment: WrapAlignment.center,
+          children: items
+              .map(
+                (item) => AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 16,
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.$1,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  constraints: BoxConstraints(
+                    minWidth: isMobile ? maxWidth : 260,
+                    maxWidth: isMobile ? maxWidth : 340,
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    item.$2,
-                    style: TextStyle(
-                      color: Colors.black.withValues(alpha: 0.75),
-                      height: 1.5,
-                    ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: const Color(0xFFE2E8F0)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.05),
+                        blurRadius: 16,
+                        offset: const Offset(0, 12),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          )
-          .toList(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.$1,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        item.$2,
+                        style: TextStyle(
+                          color: Colors.black.withValues(alpha: 0.75),
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
+        );
+      },
     );
   }
 }

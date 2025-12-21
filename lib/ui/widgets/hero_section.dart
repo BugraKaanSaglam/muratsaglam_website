@@ -150,9 +150,9 @@ class HeroSection extends StatelessWidget {
                         child: Wrap(
                           spacing: 8,
                           runSpacing: 8,
-                          children: const [
-                            _Pill(text: '30+ years experience'),
-                            _Pill(text: '10,000+ surgeries'),
+                          children: [
+                            _Pill(text: LocaleKeys.heroPill1.tr()),
+                            _Pill(text: LocaleKeys.heroPill2.tr()),
                           ],
                         ),
                       ),

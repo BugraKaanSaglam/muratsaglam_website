@@ -17,12 +17,12 @@ class ContactSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const address = 'Bahçelievler Mah. Atatürk Bulvarı No:207, Altınordu – ORDU';
-    const email = 'gozdelazer@gmail.com';
-    const phone = '(+90) 452 800 18 18';
-    const hours = [
-      'Pazartesi - Cumartesi 09:00 – 17:00',
-      'Pazar kapalı',
+    final address = LocaleKeys.contactAddressValue.tr();
+    final email = LocaleKeys.contactEmailValue.tr();
+    final phone = LocaleKeys.contactPhoneValue.tr();
+    final hours = [
+      LocaleKeys.contactHoursLine1.tr(),
+      LocaleKeys.contactHoursLine2.tr(),
     ];
 
     return Container(

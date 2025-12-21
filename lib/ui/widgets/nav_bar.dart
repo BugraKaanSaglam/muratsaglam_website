@@ -23,11 +23,12 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 720;
+    final navActions = [onHome, onServices, onAbout, onContact];
     final navButtons = [
-      _NavButton(label: LocaleKeys.navHome.tr(), onTap: onHome),
-      _NavButton(label: LocaleKeys.navServices.tr(), onTap: onServices),
-      _NavButton(label: LocaleKeys.navAbout.tr(), onTap: onAbout),
-      _NavButton(label: LocaleKeys.navContact.tr(), onTap: onContact),
+      _NavButton(label: LocaleKeys.navHome.tr(), onTap: navActions[0]),
+      _NavButton(label: LocaleKeys.navServices.tr(), onTap: navActions[1]),
+      _NavButton(label: LocaleKeys.navAbout.tr(), onTap: navActions[2]),
+      _NavButton(label: LocaleKeys.navContact.tr(), onTap: navActions[3]),
     ];
 
     return Container(
@@ -58,7 +59,7 @@ class NavBar extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                'Dr. Öğr. Üyesi\nMurat Sağlam',
+                '${LocaleKeys.heroTitle.tr()}\nMurat Sağlam',
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: isMobile ? 14 : 16,
@@ -101,7 +102,15 @@ class NavBar extends StatelessWidget {
                 const _LocaleSwitcher(),
                 PopupMenuButton<int>(
                   icon: const Icon(Icons.menu_rounded, color: Colors.black87),
-                  onSelected: (value) => navButtons[value].onTap(),
+                  onSelected: (value) {
+                    if (value < navActions.length) {
+                      navActions[value]();
+                      return;
+                    }
+                    if (value == navActions.length) {
+                      onAppointment();
+                    }
+                  },
                   itemBuilder: (context) => [
                     PopupMenuItem(
                       value: 0,
@@ -121,7 +130,6 @@ class NavBar extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       value: 4,
-                      onTap: onAppointment,
                       child: Text(LocaleKeys.ctaAppointment.tr()),
                     ),
                   ],

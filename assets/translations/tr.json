@@ -7,7 +7,9 @@
   },
   "hero": {
     "badge": "Oküloplasti ve ileri göz cerrahisi",
-    "title": "Dr. Öğr. Üyesi"
+    "title": "Dr. Öğr. Üyesi",
+    "pill1": "30+ yıl deneyim",
+    "pill2": "10.000+ ameliyat"
   },
   "cta": {
     "appointment": "Randevu Al",
@@ -30,6 +32,16 @@
     "address": "Adres",
     "phone": "Telefon",
     "email": "E-posta",
-    "hours": "Çalışma saatleri"
+    "hours": "Çalışma saatleri",
+    "address_value": "Bahçelievler Mah. Atatürk Bulvarı No:207, Altınordu – ORDU",
+    "phone_value": "(+90) 452 800 18 18",
+    "email_value": "gozdelazer@gmail.com",
+    "hours_line1": "Pazartesi - Cumartesi 09:00 – 17:00",
+    "hours_line2": "Pazar kapalı"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "retry": "Tekrar dene",
+    "load_error": "Yüklenirken bir hata oluştu."
   }
 }
