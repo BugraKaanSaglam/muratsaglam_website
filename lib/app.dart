@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'ui/home_page.dart';
+import 'features/home/presentation/home_page.dart';
 
 /// Root MaterialApp with theming and localization.
 class App extends StatelessWidget {

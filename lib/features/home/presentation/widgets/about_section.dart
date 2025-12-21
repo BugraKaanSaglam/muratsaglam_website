@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../l10n/keys.dart';
+import '../../../../core/l10n/keys.dart';
 import '../../models/service_info.dart';
 
 /// About block with portrait overlay.
