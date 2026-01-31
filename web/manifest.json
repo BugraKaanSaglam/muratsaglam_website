@@ -1,11 +1,11 @@
 {
-    "name": "muratsaglam_website",
-    "short_name": "muratsaglam_website",
-    "start_url": ".",
+    "name": "Dr. Murat Saglam",
+    "short_name": "DrMuratSaglam",
+    "start_url": "https://drmuratsaglam.com/",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A personal website for Dr. Murat Saglam.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

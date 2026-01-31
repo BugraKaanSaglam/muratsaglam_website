@@ -55,6 +55,8 @@ class LocaleKeys {
   static const languagesArBody = 'languages.ar.body';
   static const languagesFaTitle = 'languages.fa.title';
   static const languagesFaBody = 'languages.fa.body';
+  static const languagesKaTitle = 'languages.ka.title';
+  static const languagesKaBody = 'languages.ka.body';
 
   static const contactAddress = 'contact.address';
   static const contactPhone = 'contact.phone';

@@ -49,7 +49,8 @@
     "en": {"title": "English", "body": "İngilizce açıklama ve yönlendirme."},
     "de": {"title": "Deutsch", "body": "Almanca bilgilendirme ve süreç."},
     "ar": {"title": "العربية", "body": "Arapça bilgilendirme ve plan."},
-    "fa": {"title": "فارسی", "body": "Farsça bilgilendirme ve takip."}
+    "fa": {"title": "فارسی", "body": "Farsça bilgilendirme ve takip."},
+    "ka": {"title": "ქართული", "body": "Gürcüce açıklama ve randevu yönlendirmesi."}
   },
   "contact": {
     "address": "Adres",

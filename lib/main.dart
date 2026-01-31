@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'app.dart';
 
-const _supportedLocales = [Locale('en'), Locale('tr'), Locale('de'), Locale('ar'), Locale('fa')];
+const _supportedLocales = [Locale('en'), Locale('tr'), Locale('de'), Locale('ar'), Locale('fa'), Locale('ka')];
 
 // Entry point with localization bootstrap.
 Future<void> main() async {

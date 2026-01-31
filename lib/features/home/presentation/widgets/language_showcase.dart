@@ -37,6 +37,11 @@ class LanguageShowcase extends StatelessWidget {
         title: LocaleKeys.languagesFaTitle.tr(),
         body: LocaleKeys.languagesFaBody.tr(),
       ),
+      _LanguageItem(
+        locale: const Locale('ka'),
+        title: LocaleKeys.languagesKaTitle.tr(),
+        body: LocaleKeys.languagesKaBody.tr(),
+      ),
     ];
 
     return Container(
@@ -286,6 +291,8 @@ class _FlagBadge extends StatelessWidget {
         return _StripeFlag(
           colors: [const Color(0xFF16A34A), Colors.white, const Color(0xFFDC2626)],
         );
+      case 'ka':
+        return _GeorgiaFlag();
       default:
         return _UsaFlag();
     }
@@ -364,6 +371,32 @@ class _UsaFlag extends StatelessWidget {
               height: 9,
               color: const Color(0xFF1D4ED8),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GeorgiaFlag extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    const crossColor = Color(0xFFDC2626);
+    return _FlagBase(
+      color: Colors.white,
+      child: Stack(
+        children: const [
+          Positioned(
+            left: 12,
+            top: 0,
+            bottom: 0,
+            child: SizedBox(width: 4, child: ColoredBox(color: crossColor)),
+          ),
+          Positioned(
+            top: 7,
+            left: 0,
+            right: 0,
+            child: SizedBox(height: 4, child: ColoredBox(color: crossColor)),
           ),
         ],
       ),

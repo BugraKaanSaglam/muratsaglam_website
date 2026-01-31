@@ -49,7 +49,8 @@
     "en": {"title": "English", "body": "Klare Informationen und Betreuung auf Englisch."},
     "de": {"title": "Deutsch", "body": "Aufklärung und Terminprozess auf Deutsch."},
     "ar": {"title": "العربية", "body": "Erklärungen und Planung auf Arabisch."},
-    "fa": {"title": "فارسی", "body": "Erklärungen und Nachsorge auf Persisch."}
+    "fa": {"title": "فارسی", "body": "Erklärungen und Nachsorge auf Persisch."},
+    "ka": {"title": "ქართული", "body": "Georgische Erklärungen und Terminablauf."}
   },
   "contact": {
     "address": "Adresse",

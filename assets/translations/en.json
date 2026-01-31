@@ -49,7 +49,8 @@
     "en": {"title": "English", "body": "Clear guidance and follow-up in English."},
     "de": {"title": "Deutsch", "body": "German explanations and scheduling support."},
     "ar": {"title": "العربية", "body": "Arabic explanations and care planning."},
-    "fa": {"title": "فارسی", "body": "Persian explanations and follow-up."}
+    "fa": {"title": "فارسی", "body": "Persian explanations and follow-up."},
+    "ka": {"title": "ქართული", "body": "Georgian explanations and appointment guidance."}
   },
   "contact": {
     "address": "Address",
