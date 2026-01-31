@@ -6,27 +6,50 @@
     "contact": "Contact"
   },
   "hero": {
-    "badge": "Oculoplastic & advanced eye surgery",
-    "title": "Assoc. Prof. Dr.",
-    "pill1": "30+ years experience",
-    "pill2": "10,000+ surgeries"
+    "badge": "Custom ocular prosthesis & oculoplastics",
+    "title": "Assoc. Prof. Dr."
   },
   "cta": {
     "appointment": "Book appointment",
     "services": "View all services"
   },
   "stats": {
-    "item1": {"title": "Oculoplastics", "body": "Eyelid aesthetics, prosthetics, tear duct surgery."},
+    "item1": {"title": "Ocular Prosthesis", "body": "Custom prosthesis, socket care, oculoplastic reconstruction."},
     "item2": {"title": "Retina & Vitreous", "body": "Diabetic retinopathy, vitreoretinal surgery, lasers."},
     "item3": {"title": "Cataract & Laser", "body": "Premium lenses, excimer laser, refractive solutions."}
   },
+  "expertise": {
+    "title": "Expertise & Technology",
+    "subtitle": "Focused, concise highlights of techniques and care.",
+    "item1": {"title": "Custom ocular prosthesis", "body": "Color, vessels, and details are matched naturally."},
+    "item2": {"title": "Orbital implant", "body": "Personalized options for movement and volume."},
+    "item3": {"title": "Oculoplastic reconstruction", "body": "Eyelid and socket aesthetics balanced with function."},
+    "item4": {"title": "Vitreoretinal surgery", "body": "Surgical care for retina and intraocular bleeding."},
+    "item5": {"title": "Excimer laser", "body": "Laser options for refractive correction."},
+    "item6": {"title": "Cataract & premium lenses", "body": "Planning focused on clarity and visual quality."}
+  },
   "services": {
     "count": "articles",
-    "lead": "All clinical focus areas gathered on one page for quick reading.",
+    "lead": "Featured focus: custom ocular prosthesis. All clinical areas on one page for quick reading.",
     "detail": "Details"
+  },
+  "featured": {
+    "label": "Featured focus",
+    "tag": "Featured"
   },
   "about": {
     "tagline": "Member of the Turkish Ophthalmology Association, 30+ years of expertise"
+  },
+  "languages": {
+    "title": "Languages",
+    "subtitle": "Clear information and appointment guidance in your language.",
+    "selected": "Selected",
+    "action": "Switch to this language",
+    "tr": {"title": "Türkçe", "body": "Detailed explanations in Turkish."},
+    "en": {"title": "English", "body": "Clear guidance and follow-up in English."},
+    "de": {"title": "Deutsch", "body": "German explanations and scheduling support."},
+    "ar": {"title": "العربية", "body": "Arabic explanations and care planning."},
+    "fa": {"title": "فارسی", "body": "Persian explanations and follow-up."}
   },
   "contact": {
     "address": "Address",

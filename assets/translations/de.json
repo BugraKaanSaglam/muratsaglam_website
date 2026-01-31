@@ -6,27 +6,50 @@
     "contact": "Kontakt"
   },
   "hero": {
-    "badge": "Okuloplastik & moderne Augenchirurgie",
-    "title": "Assoc. Prof. Dr.",
-    "pill1": "30+ Jahre Erfahrung",
-    "pill2": "10.000+ Operationen"
+    "badge": "Individuelle Augenprothese & Okuloplastik",
+    "title": "Assoc. Prof. Dr."
   },
   "cta": {
     "appointment": "Termin buchen",
     "services": "Alle Leistungen"
   },
   "stats": {
-    "item1": {"title": "Okuloplastik", "body": "Lidästhetik, Prothesen, Tränenwegs­chirurgie."},
+    "item1": {"title": "Augenprothese", "body": "Individuelle Prothesen, Augenhöhlenpflege, okuloplastische Rekonstruktion."},
     "item2": {"title": "Netzhaut & Glaskörper", "body": "Diabetische Retinopathie, vitreoretinale Chirurgie, Laser."},
     "item3": {"title": "Katarakt & Laser", "body": "Premiumlinsen, Excimer-Laser, refraktive Lösungen."}
   },
+  "expertise": {
+    "title": "Expertise & Technologie",
+    "subtitle": "Kompakte Highlights zu Techniken und Behandlungsschwerpunkten.",
+    "item1": {"title": "Individuelle Augenprothese", "body": "Farbe, Gefäße und Details werden natürlich angepasst."},
+    "item2": {"title": "Orbitalimplantat", "body": "Personalisierte Optionen für Bewegung und Volumen."},
+    "item3": {"title": "Okuloplastische Rekonstruktion", "body": "Funktion und Ästhetik von Lid und Augenhöhle im Gleichgewicht."},
+    "item4": {"title": "Vitreoretinale Chirurgie", "body": "Chirurgische Behandlung von Netzhaut und Blutungen."},
+    "item5": {"title": "Excimer-Laser", "body": "Laseroptionen für refraktive Korrekturen."},
+    "item6": {"title": "Katarakt & Premiumlinsen", "body": "Planung für klare Sicht und Sehqualität."}
+  },
   "services": {
     "count": "Artikel",
-    "lead": "Alle Schwerpunkte auf einer Seite zusammengefasst.",
+    "lead": "Schwerpunkt: individuelle Augenprothese. Alle Schwerpunkte auf einer Seite zusammengefasst.",
     "detail": "Details"
+  },
+  "featured": {
+    "label": "Ausgewählter Schwerpunkt",
+    "tag": "Hervorgehoben"
   },
   "about": {
     "tagline": "Mitglied der Türkischen Ophthalmologischen Gesellschaft, 30+ Jahre Erfahrung"
+  },
+  "languages": {
+    "title": "Sprachen",
+    "subtitle": "Klare Informationen und Terminabläufe in Ihrer Sprache.",
+    "selected": "Ausgewählt",
+    "action": "Diese Sprache wählen",
+    "tr": {"title": "Türkçe", "body": "Detaillierte Erklärungen auf Türkisch."},
+    "en": {"title": "English", "body": "Klare Informationen und Betreuung auf Englisch."},
+    "de": {"title": "Deutsch", "body": "Aufklärung und Terminprozess auf Deutsch."},
+    "ar": {"title": "العربية", "body": "Erklärungen und Planung auf Arabisch."},
+    "fa": {"title": "فارسی", "body": "Erklärungen und Nachsorge auf Persisch."}
   },
   "contact": {
     "address": "Adresse",

@@ -144,18 +144,6 @@ class HeroSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                      Positioned(
-                        bottom: 16,
-                        left: 16,
-                        child: Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: [
-                            _Pill(text: LocaleKeys.heroPill1.tr()),
-                            _Pill(text: LocaleKeys.heroPill2.tr()),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -163,36 +151,6 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Pill extends StatelessWidget {
-  const _Pill({required this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 12,
-          ),
-        ],
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          color: Colors.black87,
-          fontWeight: FontWeight.w700,
-        ),
       ),
     );
   }

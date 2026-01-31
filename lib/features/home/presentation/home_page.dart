@@ -7,7 +7,10 @@ import '../data/content_repository.dart';
 import '../models/service_info.dart';
 import 'widgets/about_section.dart';
 import 'widgets/contact_section.dart';
+import 'widgets/expertise_strip.dart';
+import 'widgets/featured_service.dart';
 import 'widgets/hero_section.dart';
+import 'widgets/language_showcase.dart';
 import 'widgets/nav_bar.dart';
 import 'widgets/service_dialog.dart';
 import 'widgets/services_grid.dart';
@@ -22,6 +25,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const _prosthesisSlug = 'goz-protezi-veya-gozde-tattoo';
+
   late final ScrollController _scrollController;
   final ContentRepository _contentRepository = ContentRepository();
   Future<List<ServiceInfo>>? _servicesFuture;
@@ -77,6 +82,15 @@ class _HomePageState extends State<HomePage> {
         return fallback ?? _placeholderService(slug);
       },
     );
+  }
+
+  ServiceInfo? _findOptionalService(List<ServiceInfo> services, String slug) {
+    for (final service in services) {
+      if (service.slug == slug) {
+        return service;
+      }
+    }
+    return null;
   }
 
   void _scrollTo(GlobalKey key) {
@@ -140,10 +154,16 @@ class _HomePageState extends State<HomePage> {
           ),
         );
         final heroInfo = _findService(services, 'okuloplasti-nedir');
+        final prosthesis =
+            _findOptionalService(services, _prosthesisSlug);
         final serviceItems = services
             .where((e) =>
                 e.slug != 'iletisim-tr' && e.slug != 'murat-saglam-kimdir')
             .toList();
+        final orderedServices = [
+          ...serviceItems.where((e) => e.slug == _prosthesisSlug),
+          ...serviceItems.where((e) => e.slug != _prosthesisSlug),
+        ];
 
         return Scaffold(
           body: Stack(
@@ -170,12 +190,23 @@ class _HomePageState extends State<HomePage> {
                         onContact: () => _scrollTo(_contactKey),
                         onServices: () => _scrollTo(_servicesKey),
                       ),
+                      if (prosthesis != null) ...[
+                        const SizedBox(height: 22),
+                        FeaturedService(
+                          info: prosthesis,
+                          onOpen: () => _openDetails(context, prosthesis),
+                          onAppointment: _openAppointment,
+                        ),
+                      ],
                       const SizedBox(height: 28),
                       const StatsRow(),
+                      const SizedBox(height: 24),
+                      const ExpertiseStrip(),
                       const SizedBox(height: 28),
                       ServicesGrid(
                         key: _servicesKey,
-                        services: serviceItems,
+                        services: orderedServices,
+                        featuredSlug: _prosthesisSlug,
                         onOpen: (info) => _openDetails(context, info),
                       ),
                       const SizedBox(height: 28),
@@ -186,6 +217,8 @@ class _HomePageState extends State<HomePage> {
                         contact: contact,
                         onAppointment: _openAppointment,
                       ),
+                      const SizedBox(height: 28),
+                      const LanguageShowcase(),
                       const SizedBox(height: 48),
                     ],
                   ),

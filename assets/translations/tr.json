@@ -6,27 +6,50 @@
     "contact": "İletişim"
   },
   "hero": {
-    "badge": "Oküloplasti ve ileri göz cerrahisi",
-    "title": "Dr. Öğr. Üyesi",
-    "pill1": "30+ yıl deneyim",
-    "pill2": "10.000+ ameliyat"
+    "badge": "Kişiye özel protez göz ve oküloplasti",
+    "title": "Dr. Öğr. Üyesi"
   },
   "cta": {
     "appointment": "Randevu Al",
     "services": "Tüm hizmetler"
   },
   "stats": {
-    "item1": {"title": "Oküloplasti", "body": "Göz kapağı estetiği, protez, gözyaşı kanalı cerrahisi."},
+    "item1": {"title": "Protez Göz", "body": "Kişiye özel protez, soket bakımı, oküloplastik rekonstrüksiyon."},
     "item2": {"title": "Retina & Vitreus", "body": "Diyabetik retinopati, vitreoretinal cerrahi, lazer."},
     "item3": {"title": "Katarakt & Lazer", "body": "Premium lens, excimer lazer, refraktif çözümler."}
   },
+  "expertise": {
+    "title": "Uzmanlık & Teknoloji",
+    "subtitle": "Klinik odağı güçlendiren kısa ve net teknoloji başlıkları.",
+    "item1": {"title": "Kişiye özel protez göz", "body": "Renk, damar ve detaylar doğal göze uyumlu hazırlanır."},
+    "item2": {"title": "Orbital implant", "body": "Hareket ve hacim için kişiye uygun seçenekler."},
+    "item3": {"title": "Oküloplastik rekonstrüksiyon", "body": "Kapak ve soket estetiği fonksiyonla dengelenir."},
+    "item4": {"title": "Vitreoretinal cerrahi", "body": "Retina ve göz içi kanamalara yönelik cerrahi."},
+    "item5": {"title": "Excimer lazer", "body": "Refraktif kusurlarda lazer seçenekleri."},
+    "item6": {"title": "Katarakt & akıllı lens", "body": "Görme kalitesi için premium lens planlama."}
+  },
   "services": {
     "count": "içerik",
-    "lead": "Tüm klinik odak alanları hızlı okumak için tek sayfada toplandı.",
+    "lead": "Öne çıkan alan: kişiye özel protez göz. Tüm klinik odak alanları hızlı okumak için tek sayfada toplandı.",
     "detail": "Detay"
+  },
+  "featured": {
+    "label": "Öne çıkan uzmanlık",
+    "tag": "Öne çıkan"
   },
   "about": {
     "tagline": "Türk Oftalmoloji Derneği üyesi, 30+ yıllık deneyim"
+  },
+  "languages": {
+    "title": "Diller",
+    "subtitle": "Size en uygun dilde net bilgi ve randevu süreci.",
+    "selected": "Seçili",
+    "action": "Bu dili seç",
+    "tr": {"title": "Türkçe", "body": "Türkçe detaylı açıklama ve süreç."},
+    "en": {"title": "English", "body": "İngilizce açıklama ve yönlendirme."},
+    "de": {"title": "Deutsch", "body": "Almanca bilgilendirme ve süreç."},
+    "ar": {"title": "العربية", "body": "Arapça bilgilendirme ve plan."},
+    "fa": {"title": "فارسی", "body": "Farsça bilgilendirme ve takip."}
   },
   "contact": {
     "address": "Adres",

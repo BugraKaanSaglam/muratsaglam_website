@@ -64,17 +64,6 @@ class AboutSection extends StatelessWidget {
                     height: 1.6,
                   ),
                 ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    _pill('Oküloplasti'),
-                    _pill('Retina / Vitrektomi'),
-                    _pill('Akıllı lens'),
-                    _pill('Glokom'),
-                  ],
-                ),
               ],
             ),
           ),
@@ -127,21 +116,4 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget _pill(String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xFFEFF6FF),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: const Color(0xFFDBEAFE)),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: Color(0xFF0F172A),
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    );
-  }
 }

@@ -10,10 +10,12 @@ class ServicesGrid extends StatelessWidget {
     super.key,
     required this.services,
     required this.onOpen,
+    this.featuredSlug,
   });
 
   final List<ServiceInfo> services;
   final void Function(ServiceInfo) onOpen;
+  final String? featuredSlug;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +61,19 @@ class ServicesGrid extends StatelessWidget {
               runSpacing: 16,
               children: services
                   .map(
-                    (service) => SizedBox(
-                      width: cardWidth,
-                      child: _ServiceCard(
-                        info: service,
-                        onOpen: () => onOpen(service),
-                      ),
-                    ),
+                    (service) {
+                      final isFeatured =
+                          featuredSlug != null && service.slug == featuredSlug;
+                      return SizedBox(
+                        width: cardWidth,
+                        child: _ServiceCard(
+                          info: service,
+                          onOpen: () => onOpen(service),
+                          featuredLabel:
+                              isFeatured ? LocaleKeys.featuredTag.tr() : null,
+                        ),
+                      );
+                    },
                   )
                   .toList(),
             );
@@ -98,10 +106,12 @@ class _ServiceCard extends StatefulWidget {
   const _ServiceCard({
     required this.info,
     required this.onOpen,
+    this.featuredLabel,
   });
 
   final ServiceInfo info;
   final VoidCallback onOpen;
+  final String? featuredLabel;
 
   @override
   State<_ServiceCard> createState() => _ServiceCardState();
@@ -112,6 +122,7 @@ class _ServiceCardState extends State<_ServiceCard> {
 
   @override
   Widget build(BuildContext context) {
+    final isFeatured = widget.featuredLabel != null;
     return MouseRegion(
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
@@ -126,7 +137,7 @@ class _ServiceCardState extends State<_ServiceCard> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
-                color: _hovered
+                color: _hovered || isFeatured
                     ? const Color(0xFFBFDBFE)
                     : const Color(0xFFE2E8F0),
               ),
@@ -175,6 +186,29 @@ class _ServiceCardState extends State<_ServiceCard> {
                             ),
                           ),
                         ),
+                        if (isFeatured)
+                          Positioned(
+                            top: 10,
+                            left: 10,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.9),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Text(
+                                widget.featuredLabel!,
+                                style: const TextStyle(
+                                  color: Color(0xFF0F172A),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
