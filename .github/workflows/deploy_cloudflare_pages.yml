@@ -1,7 +1,8 @@
 name: Deploy Flutter Web to Cloudflare Pages
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ["main"]
 jobs:
   deploy:
     runs-on: ubuntu-latest
