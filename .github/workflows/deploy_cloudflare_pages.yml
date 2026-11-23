@@ -1,8 +1,8 @@
 name: Deploy Flutter Web to Cloudflare Pages
 
 on:
-  push:
-    branches: ["main"]
+  # Cloudflare Pages Git integration deploys main automatically; retain manual fallback.
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
